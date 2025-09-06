@@ -6,7 +6,7 @@ class SnakeGame {
         this.highScoreElement = document.getElementById('highScore');
         this.gameStatusElement = document.getElementById('gameStatus');
         this.levelElement = document.getElementById('level');
-        this.foodCountElement = document.getElementById('foodCount');
+        this.foodInfoElement = document.getElementById('food-info');
         this.levelCompleteModal = document.getElementById('levelCompleteModal');
         this.levelCompleteText = document.getElementById('levelCompleteText');
         this.continueBtn = document.getElementById('continueBtn');
@@ -360,12 +360,12 @@ class SnakeGame {
     }
     
     updateFoodCountDisplay() {
-        this.foodCountElement.textContent = `${this.foodCount}/12`;
+        this.foodInfoElement.textContent = `食物：${this.foodCount}/12`;
         
         // 添加食物计数动画
-        this.foodCountElement.classList.add('food-count-animation');
+        this.foodInfoElement.classList.add('food-count-animation');
         setTimeout(() => {
-            this.foodCountElement.classList.remove('food-count-animation');
+            this.foodInfoElement.classList.remove('food-count-animation');
         }, 300);
     }
     

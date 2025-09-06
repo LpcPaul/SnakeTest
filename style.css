@@ -67,6 +67,13 @@ h1 {
     color: #2d3748;
 }
 
+#food-info {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: 10px;
+    color: #2d3748;
+}
+
 #level {
     color: #3182ce;
 }
