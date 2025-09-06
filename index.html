@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>贪吃蛇游戏</h1>
+        
+        <div class="game-info">
+            <div class="score-display">
+                <span>分数: <span id="score">0</span></span>
+                <span>最高分: <span id="highScore">0</span></span>
+            </div>
+            <div class="level-display">
+                <span>关卡: <span id="level">1</span></span>
+                <span>食物: <span id="foodCount">0</span>/12</span>
+            </div>
+            <div class="game-status" id="gameStatus">按空格键开始游戏</div>
+        </div>
+        
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        
+        <div class="controls">
+            <button id="startBtn" class="btn">开始</button>
+            <button id="pauseBtn" class="btn">暂停</button>
+            <button id="restartBtn" class="btn">重新开始</button>
+        </div>
+        
+        <div class="instructions">
+            <h3>游戏说明</h3>
+            <p>使用方向键或WASD控制蛇的移动</p>
+            <p>吃到红色食物可以增长身体和得分</p>
+            <p>避免撞到墙壁或自己的身体</p>
+            <p>按空格键可以暂停/继续游戏</p>
+        </div>
+    </div>
+    
+    <!-- 关卡通过弹窗 -->
+    <div id="levelCompleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎉 恭喜通过关卡！</h2>
+            </div>
+            <div class="modal-body">
+                <p id="levelCompleteText">您已成功通过第1关！</p>
+                <p class="level-info">下一关游戏速度将会更快，挑战更大！</p>
+                <p class="snake-reset-info">新关卡开始时，贪吃蛇长度将重置为1</p>
+            </div>
+            <div class="modal-footer">
+                <button id="continueBtn" class="btn btn-primary">继续下一关</button>
+                <button id="quitBtn" class="btn btn-secondary">放弃游戏</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
