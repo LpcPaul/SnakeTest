@@ -324,39 +324,41 @@ h1 {
  }
  
  /* 响应式弹窗 */
- @media (max-width: 600px) {
-     .modal-content {
-         margin: 5% auto;
-         width: 95%;
-     }
-     
-     .modal-header {
-         padding: 20px;
-     }
-     
-     .modal-header h2 {
-         font-size: 1.5em;
-     }
-     
-     .modal-body {
-         padding: 25px 20px;
-     }
-     
-     #levelCompleteText {
-         font-size: 1.2em;
-     }
-     
-     .modal-footer {
-         padding: 15px 20px 25px;
-         flex-direction: column;
-     }
-     
-     .btn-primary,
-     .btn-secondary {
-         width: 100%;
-         margin: 5px 0;
-     }
- }
+  @media (max-width: 600px) {
+      .modal-content {
+          margin: 5% auto;
+          width: 95%;
+      }
+      
+      .modal-header {
+          padding: 20px;
+      }
+      
+      .modal-header h2 {
+          font-size: 1.5em;
+      }
+      
+      .modal-body {
+          padding: 25px 20px;
+      }
+      
+      #levelCompleteText {
+          font-size: 1.2em;
+      }
+      
+      .modal-footer {
+          padding: 15px 20px 25px;
+          flex-direction: column;
+      }
+      
+      .btn-primary,
+      .btn-secondary {
+          width: 100%;
+          margin: 5px 0;
+      }
+  }
+  
+
 
 /* 游戏状态动画 */
 .game-status {

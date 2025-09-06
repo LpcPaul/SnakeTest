@@ -12,9 +12,11 @@ class SnakeGame {
         this.continueBtn = document.getElementById('continueBtn');
         this.quitBtn = document.getElementById('quitBtn');
         
+        
         // 游戏设置
         this.gridSize = 20;
         this.tileCount = this.canvas.width / this.gridSize;
+        this.maxLevel = 10; // 最大关卡数
         
         // 游戏状态
         this.gameRunning = false;
@@ -337,6 +339,12 @@ class SnakeGame {
     }
     
     levelUp() {
+        // 检查是否已达到最大关卡
+        if (this.level >= this.maxLevel) {
+            this.gameComplete();
+            return;
+        }
+        
         this.level++;
         this.foodEaten = 0;
         this.currentSpeed = Math.max(50, this.baseSpeed - (this.level - 1) * 15);
@@ -352,13 +360,16 @@ class SnakeGame {
     }
     
     updateFoodCountDisplay() {
-        this.foodCountElement.textContent = this.foodEaten;
+        this.foodCountElement.textContent = `${this.foodCount}/12`;
+        
         // 添加食物计数动画
         this.foodCountElement.classList.add('food-count-animation');
         setTimeout(() => {
             this.foodCountElement.classList.remove('food-count-animation');
         }, 300);
     }
+    
+
     
     setupModalEvents() {
         // 继续按钮事件
@@ -379,11 +390,19 @@ class SnakeGame {
     }
     
     startNewLevel() {
+        // 如果是通关后重新挑战，重置所有游戏状态
+        if (this.level >= this.maxLevel) {
+            this.level = 1;
+            this.currentSpeed = this.baseSpeed;
+            this.score = 0;
+            this.updateScoreDisplay();
+        }
+        
         // 重置蛇的长度为1
         this.snake = [{x: 200, y: 200}];
         
         // 重置食物计数
-        this.foodEaten = 0;
+        this.foodCount = 0;
         this.updateFoodCountDisplay();
         
         // 生成新食物
@@ -397,12 +416,56 @@ class SnakeGame {
         this.gameLoop();
     }
     
+    gameComplete() {
+        // 暂停游戏
+        this.gameRunning = false;
+        
+        // 更新弹窗文本为通关祝贺
+        this.levelCompleteText.textContent = `🎉 恭喜您！已成功通关所有10关！🎉`;
+        
+        // 修改弹窗内容
+        const modalBody = this.levelCompleteModal.querySelector('.modal-body');
+        const levelInfo = modalBody.querySelector('.level-info');
+        const snakeResetInfo = modalBody.querySelector('.snake-reset-info');
+        
+        levelInfo.textContent = '您已完成了所有挑战，成为贪吃蛇大师！';
+        snakeResetInfo.textContent = '感谢您的游戏，可以重新开始挑战或结束游戏。';
+        
+        // 修改按钮文本
+        this.continueBtn.textContent = '重新挑战';
+        this.quitBtn.textContent = '结束游戏';
+        
+        // 显示弹窗
+        this.levelCompleteModal.style.display = 'block';
+        
+        // 添加通关庆祝动画
+        this.levelElement.classList.add('level-up-animation');
+        this.progressFill.style.boxShadow = '0 4px 20px rgba(72, 187, 120, 0.6)';
+        
+        // 2秒后移除动画类
+        setTimeout(() => {
+            this.levelElement.classList.remove('level-up-animation');
+        }, 2000);
+    }
+    
     showLevelUpMessage() {
         // 暂停游戏
         this.gameRunning = false;
         
         // 更新弹窗文本
         this.levelCompleteText.textContent = `您已成功通过第${this.level - 1}关！`;
+        
+        // 重置弹窗内容（防止通关后的修改影响普通关卡）
+        const modalBody = this.levelCompleteModal.querySelector('.modal-body');
+        const levelInfo = modalBody.querySelector('.level-info');
+        const snakeResetInfo = modalBody.querySelector('.snake-reset-info');
+        
+        levelInfo.textContent = '下一关游戏速度将会更快，挑战更大！';
+        snakeResetInfo.textContent = '新关卡开始时，贪吃蛇长度将重置为1';
+        
+        // 重置按钮文本
+        this.continueBtn.textContent = '继续下一关';
+        this.quitBtn.textContent = '放弃游戏';
         
         // 显示弹窗
         this.levelCompleteModal.style.display = 'block';
